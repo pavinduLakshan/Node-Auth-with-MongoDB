@@ -8,25 +8,12 @@ router.post("/register", function(req, res) {
     req.body.name,
     req.body.email,
     req.body.password,
-    (err, data) => {
-      let status = 200 
-      if (err) {
-        status = 400
-        console.log(err);
-      }
-      res.status(status).send(data)
-    }
+    res
   )
 });
 
 router.post("/login", function(req, res) {
-  UserController.login(req.body.email,req.body.password,(err,data) => {
-    let status = 200
-    if(err){
-        status = 400
-    }
-    res.status(status).send(data)
-  })
+  UserController.login(req.body.email,req.body.password,res)
 });
 
 router.get("/me", auth, async (req, res) => {
